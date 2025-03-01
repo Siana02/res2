@@ -171,6 +171,14 @@
                 <li>JavaScript - Intermediate</li>
             </ul>
         </section>
+        
+        <section class="section">
+            <div class="section-title">Referees</div>
+            <div contenteditable="true">
+                <p><strong>Referee Name</strong><br> Organization <br> Phone Number</p>
+            </div>
+        </section>
+        
   <button class="download-btn" id="downloadBtn" onclick="downloadPDF()">Download as PDF</button> 
         <footer class="footer">
             | &copy; 2025 |
@@ -207,15 +215,29 @@
             `;
             container.appendChild(entry);
         }
+function downloadPDF() {
+    const resume = document.getElementById('resume');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const controlBtns = document.querySelectorAll('.control-btn, .remove-btn');
 
-        function downloadPDF() {
-            const resume = document.getElementById('resume');
-            document.getElementById('downloadBtn').style.display = 'none';
+    // Hide buttons before PDF generation
+    downloadBtn.style.display = 'none';
+    controlBtns.forEach(btn => btn.style.display = 'none');
 
-            html2pdf().from(resume).save().then(() => {
-                document.getElementById('downloadBtn').style.display = 'block';
-            });
-        }
+    // Generate the PDF
+    html2pdf(resume, {
+        margin: 10,
+        filename: 'Resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }).then(() => {
+        // Show buttons again after download
+        downloadBtn.style.display = 'block';
+        controlBtns.forEach(btn => btn.style.display = 'block');
+    });
+}
+        
     </script>
 </body>
 </html>
