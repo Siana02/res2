@@ -223,7 +223,10 @@
             `;
             container.appendChild(entry);
         }
-function downloadPDF() {
+        function downloadPDF() {
+    // Force blur on all contenteditable elements to commit changes
+    document.querySelectorAll('[contenteditable="true"]').forEach(el => el.blur());
+
     const resume = document.getElementById('resume');
     const downloadBtn = document.getElementById('downloadBtn');
     const controlBtns = document.querySelectorAll('.control-btn, .remove-btn');
@@ -245,7 +248,7 @@ function downloadPDF() {
         controlBtns.forEach(btn => btn.style.display = 'block');
     });
 }
-        
+
     </script>
 </body>
 </html>
