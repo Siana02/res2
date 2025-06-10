@@ -22,7 +22,13 @@
             font-size: 16px;
         }
 
-        .resume {
+        @media print {
+  .section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .resume {
+    page-break-after: always;
             width: 90%;
             max-width: 900px;
             background: black;
